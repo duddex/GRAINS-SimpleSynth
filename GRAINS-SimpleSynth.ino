@@ -18,7 +18,7 @@ byte wave = SINE;
 byte envelope = ENVELOPE0;
 
 void setup() {
-  Serial.begin(115200);
+  //Serial.begin(115200);
   pinMode(CV_POT_IN1, INPUT);
   pinMode(CV_POT_IN2, INPUT);
   pinMode(CV_POT3, INPUT);
@@ -40,7 +40,6 @@ void loop() {
   // React only if the state of input "A" changed
   if (oldgate != gate) {
     if (gate) {
-      Serial.print("note on -> ");
       // FIXME: workaround for a problem with my Arturia Keystep
       delay(5);
 
@@ -51,7 +50,6 @@ void loop() {
       wave = analogRead(CV_POT_IN1) / 200;
 
       // ENVELOPE0 = 0, ENVELOPE1 = 1, ENVELOPE2 = 2, ENVELOPE3 = 3
-      // envelope = map(analogRead(CV_POT3), 0, 1023, 0, 3);
       envelope = analogRead(CV_POT3) / 340;
 
       // Read the voltage value (0 - 1023) for the pitch
@@ -79,19 +77,20 @@ void loop() {
 
 /*
       // Debug Output
-      Serial.print("Voltage: ");
+      Serial.print("Note on -> Sensor Value: ");
+      Serial.print(sensorValue);
+      Serial.print(", Voltage: ");
       Serial.print(voltage);
-      Serial.print(" Note: ");
+      Serial.print(", Note: ");
       Serial.print(note);
-      Serial.print(" Length: ");
+      Serial.print(", Length: ");
       Serial.print(length);
-      Serial.print(" Wave: ");
+      Serial.print(", Wave: ");
       Serial.print(wave);
-      Serial.print(" Envelope: ");
+      Serial.print(", Envelope: ");
       Serial.println(envelope);
 */
     } else {
-      Serial.println("note off");
       // TODO: stop sound when length is set to 127?
     }
 
