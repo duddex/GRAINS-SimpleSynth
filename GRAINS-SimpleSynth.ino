@@ -66,6 +66,11 @@ void loop() {
       // http://www.phys.unsw.edu.au/jw/notes.html
       note = map(voltage * 1000, 0, 3800, 36, 82);
 
+      // NOTE: There seems to be a problem with the tracking of
+      //       notes depending on whether GRAINS is connected to
+      //       USB or not. Tracking is correct, when USB is
+      //       connected. But then you hear the "USB whining" noise
+
       the_synth.setPitch(VOICE0, note);
       the_synth.setLength(VOICE0, length);
       the_synth.setWave(VOICE0, wave);
